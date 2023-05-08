@@ -1,0 +1,34 @@
+{% extends 'midterm/base.html' %}
+
+{% block main_area %}
+          <h3>NAMECARD(Option 1)</h3>
+          {% if staff.rank == 'CEO' %}
+            <div class="media bg-info text-white d-inline-flex p-2">
+              <div class="media-body">
+                <h5 class="mt-0">{{staff}}</h5>
+                <p>우리나라 연구소</p>
+                <p class="mb-0 ml-5">Tel: 010-000-0000</p>
+                <p class="mb-0 ml-5">Email: sample@sample.com</p>
+              </div>
+            </div>
+          
+          {% elif staff.rank == 'manager' %}
+            <div class="media bg-warning text-white d-inline-flex p-2">
+              <div class="media-body">
+                <h5 class="mt-0">{{staff}}</h5>
+                <p>우리나라 연구소</p>
+                <p class="mb-0 ml-5">Tel: 010-000-0000</p>
+                <p class="mb-0 ml-5">Email: sample@sample.com</p>
+              </div>
+            </div>
+          {% elif staff.rank == 'staff' %}
+            <div class="media bg-secondary text-white d-inline-flex p-2">
+              <div class="media-body">
+                <h5 class="mt-0">{{staff}}</h5>
+                <p>우리나라 연구소</p>
+                <p class="mb-0 ml-5">Tel: 010-000-0000</p>
+                <p class="mb-0 ml-5">Email: sample@sample.com</p>
+              </div>
+            </div>  
+            {% endif %}
+{% endblock %}

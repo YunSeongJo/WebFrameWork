@@ -9,11 +9,14 @@ class PostList(ListView):  # 모델명_list.html 찾도록 강제로 세팅되�
     ordering = '-pk'
     # template_name = 'blog/post_list.html'
 
+
+    #추가 Category에 대한 context를 넘겨야함 detail page도 마찬가지
+
 class PostDetail(DetailView):
     model = Post
-    template_name = 'blog/single_post_page.html'
+    template_name = 'blog/post_detail.html'
 # def index(request) :
-#    posts = Post.objects.all().order_by('-pk')
+#    posts = Post.objects.all().order_by('-pk')  모든 Post를 가져옴 / 역순으로
 #
 #    return render(
 #        request, 'blog/post_list.html',

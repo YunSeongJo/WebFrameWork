@@ -1,0 +1,21 @@
+{% extends 'midterm/base.html' %}
+
+
+{% block main_area %}
+            <h3>NAMECARD(Option 2)</h3>
+                <div class="media border border-primary d-inline-flex p-2">
+                    {% if staff.image %}
+                <img src="{{ staff.image.url }}" width="100" class="align-self-center mr-3" alt="...">
+                    {% else %}
+                    <img src="https://loremflickr.com/100/100" width="100" class="align-self-center mr-3" alt="...">
+                    {% endif %}
+                <div class="media-body">
+                    
+                    <h5 class="mt-0">{{staff}}</h5>
+                    <p>우리나라 연구소</p>
+                    <p class="mb-0">Tel: 010-000-0000</p>
+                    <p class="mb-0">Email: sample@sample.com</p>
+                </div>
+                </div> 
+
+{% endblock %}

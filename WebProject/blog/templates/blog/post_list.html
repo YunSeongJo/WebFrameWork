@@ -1,141 +1,54 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
-    <link rel="stylesheet" href="{% static 'blog/bootstrap4/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+            {% extends 'blog/base.html' %}
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
-        integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
-        crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/b9d75ae109.js" crossorigin="anonymous"></script>
-</head>
+            {% block main_area %}
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="/">Do It Django</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/blog/">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/about_me/">About Me</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="" data-toggle="modal" data-target="#loginModal">
-                            <i class="fa-solid fa-right-to-bracket"></i>&nbsp;&nbsp;&nbsp;Log In</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Modal dialog -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">로그인 방법 선택</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <button type="button" class="btn btn-outline-dark btn-block btm-sm">
-                                <i class="fa-brands fa-google"></i>&nbsp;&nbsp;
-                                Login with Google</button>
-                            <button type="button" class="btn btn-outline-dark btn-block btm-sm">
-                                <i class="fa-regular fa-envelope"></i>&nbsp;&nbsp;&nbsp;
-                                Login with E-mail</button>
-                        </div>
-                        <div class="col-sm-6">
-                            <button type="button" class="btn btn-outline-dark btn-block btn-sm">
-                                <i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;
-                                Sign up with E-mail</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- main contents-->
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-sm-8 col-md-9">
-                <h2>Blog</h2>
+                <h1>Blog</h1>
+            {% if post_list.exists %}
                 {% for p in post_list %}
                 <!-- Blog post-->
                 <div class="card mb-4">
                     {% if p.head_image %}
-                    <img class="card-img-top" src="{{ p.head_image.url }}" title="{{ p }} head image" height="350"/>
+                        <img class="card-img-top" src="{{ p.head_image.url }}" height=300 alt="{{ p }} head image" />
                     {% else %}
-                     <img class="card-img-top" src="https://picsum.photos/seed/{{ p.pk }}/800/200" title="random image" height="350"/>
+                        <img class="card-img-top" src="https://picsum.photos/seed/{{p.id}}/800/200" alt="random image" />
                     {% endif %}
-                    <div class="card-body">
-                        <div class="small text-muted">{{ p.created_at }}</div>
-                        <h2 class="card-title h4">{{ p.title }}</h2>
 
-                        {% if p.hook_text %}
-                        <h5 class="small text-muted"> {{ p.hook_text }}</h5>
+                    <div class="card-body">
+                        <div class="small text-muted">
+                            Posted on {{ p.created_at }} by
+                            <a href="#">{{ p.author | upper }}</a>
+                        </div>
+
+                        <!-- 카테고리  -->
+                        {% if p.category %}
+                        <span class = "badge badge-secondary float-right">{{ p.category }} </span>
+                        {% else %}
+                        <span class = "badge badge-secondary float-right"> 미분류 </span>
                         {% endif %}
 
-                        <p class="card-text">{{ p.content | truncatewords:5}}</p>
-                        <a class="btn btn-primary" href="{{ p.get_absolute_url }}">Read more →</a>
+                        <h2 class="card-title h4">{{p.title}}</h2>
+                        {% if p.hook_text %}
+                            <h5 class="text-muted">{{ p.hook_text }}</h5>
+                        {% endif %}
+                        <p class="card-text">{{p.content | truncatewords:15 }}</p>
+
+                        <a class="btn btn-primary" href="{{p.get_absolute_url}}">Read more →</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Posted on {{ p.created_at }} by
+                        <a href="#">{{ p.author | upper }}</a>
                     </div>
                 </div>
                 {% endfor %}
+            {% else %}
+                <h3>아직 게시물이 없습니다.</h3>
+            {% endif %}
                 <!-- Pagination-->
                 <nav aria-label="Pagination">
                     <hr class="my-0" />
                     <ul class="pagination justify-content-center my-4">
-                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
-                                aria-disabled="true">Newer</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
                         <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
                         <li class="page-item"><a class="page-link" href="#!">2</a></li>
                         <li class="page-item"><a class="page-link" href="#!">3</a></li>
@@ -144,50 +57,5 @@
                         <li class="page-item"><a class="page-link" href="#!">Older</a></li>
                     </ul>
                 </nav>
-            </div>
-            <div class="col-sm-4 col-md-3">
-                <!-- Search widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Search</div>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input class="form-control" type="text" placeholder="Enter search term..."
-                                aria-label="Enter search term..." aria-describedby="button-search" />
-                            <button class="btn btn-primary" id="button-search" type="button">Go!</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Categories widget-->
-                <div class="card mb-4">
-                    <div class="card-header">Categories</div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
-        </div>
-    </footer>
-</body>
 
-</html>
+            {% endblock %}

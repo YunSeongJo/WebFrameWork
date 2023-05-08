@@ -1,0 +1,26 @@
+{% extends 'midterm/base.html' %}
+
+{% block add %}
+{% endblock %}#뿅하고 사라짐 
+
+{% block main_area %}
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">NAME</th>
+            <th scope="col">OPT 1</th>
+            <th scope="col">OPT 2</th>           
+          </tr>
+        </thead>
+        <tbody>
+            {% for s in staff_list %}
+          <tr>
+            <th scope="row">{{s.name}}</th>
+            <td><a class="btn btn-outline-success" href="{{s.get_absolute_url}}" role="button">명함(옵션1)</a></td>
+            <td> <a class="btn btn-outline-danger" href="{{s.get_absolute_url2}}" role="button">명함(옵션2)</a></td>            
+          </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
